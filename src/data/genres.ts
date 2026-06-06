@@ -19,7 +19,12 @@ export type FamilyId =
   | "Global & trap-adjacent"
   | "Retro / other";
 
-export type Track = { artist: string; title: string; spotifyId: string | null };
+export type Track = {
+  artist: string;
+  title: string;
+  spotifyId: string | null;
+  recent?: boolean; // released in the last few years (2023+)
+};
 
 export type Genre = {
   id: string;

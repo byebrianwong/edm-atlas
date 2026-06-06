@@ -66,15 +66,38 @@ export default function DetailPanel() {
         <section className="panel__block">
           <h3 className="panel__label">Hear it</h3>
           <div className="panel__tracks">
-            {g.examples.map((ex, i) => (
-              <SpotifyEmbed key={i} track={ex} compact={i > 0} />
-            ))}
+            {g.examples
+              .filter((e) => !e.recent)
+              .map((ex, i) => (
+                <SpotifyEmbed key={`e${i}`} track={ex} compact={i > 0} />
+              ))}
           </div>
-          <p className="panel__note">
-            Spotify plays a ~30s preview when you’re logged out — sign in to Spotify
-            for full tracks.
-          </p>
+          {!g.examples.some((e) => e.recent) && (
+            <p className="panel__note">
+              Spotify plays a ~30s preview when you’re logged out — sign in to
+              Spotify for full tracks.
+            </p>
+          )}
         </section>
+
+        {g.examples.some((e) => e.recent) && (
+          <section className="panel__block">
+            <h3 className="panel__label">
+              Recent tracks <span className="panel__badge">last few years</span>
+            </h3>
+            <div className="panel__tracks">
+              {g.examples
+                .filter((e) => e.recent)
+                .map((ex, i) => (
+                  <SpotifyEmbed key={`r${i}`} track={ex} compact />
+                ))}
+            </div>
+            <p className="panel__note">
+              Spotify plays a ~30s preview when you’re logged out — sign in to
+              Spotify for full tracks.
+            </p>
+          </section>
+        )}
 
         <section className="panel__block">
           <h3 className="panel__label">Building blocks</h3>

@@ -21,6 +21,7 @@
 
 import { writeFileSync } from "node:fs";
 import { GENRES } from "../src/data/genres.ts";
+import { MORE_EXAMPLES } from "../src/data/examples.ts";
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
@@ -79,7 +80,10 @@ async function main() {
 
   for (const genre of GENRES) {
     const ids: (string | null)[] = [];
-    for (const ex of genre.examples) {
+    // Resolve the two classics from genres.ts plus the extras from examples.ts,
+    // in the same combined order the app merges them (see atlas.ts).
+    const allExamples = [...genre.examples, ...(MORE_EXAMPLES[genre.id] ?? [])];
+    for (const ex of allExamples) {
       const id = await searchTrack(token, ex.artist, ex.title);
       if (!id) misses.push(`${genre.name}: ${ex.artist} - ${ex.title}`);
       ids.push(id);
