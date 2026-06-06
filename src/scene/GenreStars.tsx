@@ -7,7 +7,7 @@ import { ATLAS_GENRES, ATLAS_BY_ID } from "../data/atlas";
 import { FAMILY_BY_ID } from "../data/families";
 import type { Genre } from "../data/genres";
 import { glowTexture } from "./glow";
-import { starTarget } from "./emphasis";
+import { starTarget, ambientLabelTarget } from "./emphasis";
 import { useAtlas } from "../state/store";
 
 const tex = glowTexture;
@@ -118,6 +118,52 @@ function Star({ g }: { g: Genre }) {
   );
 }
 
+/** A lightweight, always-on star name (family/all modes). Its opacity is
+ *  animated per-frame so names fade in and dim in sync with their stars,
+ *  without re-rendering React on hover. */
+function AmbientLabel({ g }: { g: Genre }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const cur = useRef(0);
+  const pos = POSITIONS[g.id];
+  const fam = FAMILY_BY_ID[g.family];
+
+  useFrame(() => {
+    const t = ambientLabelTarget(g.id, g.family, useAtlas.getState());
+    cur.current += (t - cur.current) * 0.16;
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = cur.current.toFixed(3);
+    el.style.visibility = cur.current < 0.015 ? "hidden" : "visible";
+  });
+
+  return (
+    <Html
+      position={[pos[0], pos[1], pos[2]]}
+      center
+      zIndexRange={[20, 0]}
+      style={{ pointerEvents: "none" }}
+    >
+      <div ref={ref} className="star-name" style={{ color: fam.glow, opacity: 0 }}>
+        {g.name}
+      </div>
+    </Html>
+  );
+}
+
+/** The ambient name layer — only mounted when the title slider is past "hover",
+ *  so the default mode carries zero extra cost. */
+function AmbientLabels() {
+  const mode = useAtlas((s) => s.labelMode);
+  if (mode === "hover") return null;
+  return (
+    <>
+      {ATLAS_GENRES.map((g) => (
+        <AmbientLabel key={g.id} g={g} />
+      ))}
+    </>
+  );
+}
+
 function HoverLabel() {
   const hoveredId = useAtlas((s) => s.hoveredId);
   if (!hoveredId) return null;
@@ -148,6 +194,7 @@ export default function GenreStars() {
       {ATLAS_GENRES.map((g) => (
         <Star key={g.id} g={g} />
       ))}
+      <AmbientLabels />
       <HoverLabel />
     </group>
   );

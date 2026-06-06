@@ -8,12 +8,15 @@
  */
 
 import { NEIGHBORS } from "../data/graph";
+import { GENRE_BY_ID } from "../data/genres";
 import type { FamilyId } from "../data/genres";
+import type { LabelMode } from "../state/store";
 
 export type Snapshot = {
   hoveredId: string | null;
   selectedId: string | null;
   familyFilter: FamilyId | null;
+  labelMode: LabelMode;
 };
 
 export type StarTarget = { opacity: number; scale: number; hot: boolean };
@@ -59,4 +62,37 @@ export function edgeTarget(
     return 0.03;
   }
   return cross ? 0.11 : 0.2;
+}
+
+/**
+ * Target opacity for a star's *always-on* name label, driven by the title
+ * slider. "hover" keeps the ambient layer dark (only the rich hover card shows);
+ * "family" reveals every name in the opened/filtered family; "all" reveals
+ * everything. In every mode a live hover spotlights its own neighborhood and
+ * dims the rest, so the names track the way the stars themselves dim.
+ */
+export function ambientLabelTarget(
+  id: string,
+  family: FamilyId,
+  s: Snapshot,
+): number {
+  if (s.labelMode === "hover") return 0;
+
+  let visible: boolean;
+  if (s.labelMode === "all") {
+    visible = true;
+  } else {
+    // "family": the constellation you've opened (selection) or filtered to.
+    const activeFamily =
+      s.familyFilter ??
+      (s.selectedId ? GENRE_BY_ID[s.selectedId]?.family ?? null : null);
+    visible = activeFamily != null && family === activeFamily;
+  }
+  if (!visible) return 0;
+
+  // The hovered star gets the richer hover card instead of an ambient name.
+  if (s.hoveredId === id) return 0;
+  // A hover spotlights its neighbors and dims everyone else's name.
+  if (s.hoveredId) return NEIGHBORS[s.hoveredId]?.includes(id) ? 1 : 0.22;
+  return 1;
 }
