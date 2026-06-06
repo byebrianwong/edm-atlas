@@ -1,0 +1,47 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+# EDM Atlas — Component Library
+
+**EDM Atlas** is a 3D star map for exploring electronic dance music: 31 subgenres
+across 8 families, each a star you can fly to, hear, and trace to its neighbors.
+
+This Storybook documents the **DOM layer** — the brand, search, legend, detail
+panel, list view, and the small building blocks they're made of. The 3D scene
+(three.js / react-three-fiber) lives on its own canvas and isn't storied here;
+everything you see in these stories is the real, accessible HUD.
+
+## Where to start
+
+- **Overview / Detail Panel** — the centerpiece. Family chip, BPM, signature
+  elements, two Spotify players, the synth demo, and live "connects to" chips.
+- **Overview / List Experience** — the full no-WebGL flow wired together: search,
+  toggle, the genre grid, and the panel, exactly as `App` composes them.
+- **HUD** — the floating chrome: brand, search, view toggle, family legend,
+  controls hint, intro overlay, loader.
+- **Components** — the leaf pieces: the Spotify embed and the synth button.
+
+## How the stories work
+
+Every component reads from a single [Zustand](https://github.com/pmndrs/zustand)
+store (`useAtlas`). Rather than mock it, each story declares the state it wants
+through a custom `parameters.atlas` patch, and a `beforeEach` in
+`.storybook/preview.tsx` resets the store to that state before the story renders:
+
+```ts
+export const Dubstep = {
+  parameters: { atlas: { selectedId: "dubstep" } },
+};
+```
+
+Because the real store drives everything, the stories are **fully interactive** —
+follow a genre's connections from the detail panel, type in search, or toggle a
+family filter, and the components respond exactly as they do in production.
+
+## Design system
+
+Stories import the app's own stylesheets (`index.css`, `styles/app.css`,
+`styles/ui.css`) and Google Fonts (Space Grotesk · Inter · JetBrains Mono), and
+sit on the same deep-space backdrop — so what you see here is pixel-identical to
+the shipped app. The `a11y` addon runs accessibility checks on every story.
