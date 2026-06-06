@@ -36,6 +36,25 @@ pnpm build      # type-check + production build to dist/
 pnpm preview    # preview the production build
 ```
 
+## Component library (Storybook)
+
+The DOM overlay components are documented in **Storybook 10**. Stories live next
+to each component (`src/**/*.stories.tsx`) and import the app's real stylesheets +
+fonts, so they render identically to production on the same deep-space backdrop.
+
+```bash
+pnpm storybook        # dev server at http://localhost:6006
+pnpm build-storybook  # static build to storybook-static/
+```
+
+Components read from the Zustand store, so each story seeds the state it needs
+declaratively via a `parameters.atlas` patch that a `beforeEach` in
+`.storybook/preview.tsx` applies before render. Nothing is mocked — the stories
+stay fully interactive (follow "connects to" chips, type in search, toggle a
+family filter), and the `@storybook/addon-a11y` addon runs accessibility checks on
+every story. Start with **Overview / Detail Panel** and **Overview / List
+Experience**.
+
 ## Project structure
 
 ```
