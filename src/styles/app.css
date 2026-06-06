@@ -1,0 +1,44 @@
+/* app shell + 3D overlay bits */
+
+.app {
+  position: fixed;
+  inset: 0;
+}
+
+.atlas-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  touch-action: none;
+}
+
+/* hover label floating above a star (drei <Html>) */
+.star-label {
+  transform: translateY(-150%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 11px;
+  border-radius: 11px;
+  background: rgba(7, 10, 20, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line-bright);
+  white-space: nowrap;
+  box-shadow: 0 10px 32px -12px rgba(0, 0, 0, 0.8);
+  user-select: none;
+}
+.star-label__name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.star-label__fam {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

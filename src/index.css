@@ -1,0 +1,197 @@
+/* ==========================================================================
+   EDM Atlas — global design system
+   Deep-space aesthetic: near-black canvas, neon family accents, glass panels.
+   ========================================================================== */
+
+:root {
+  /* type */
+  --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  /* space + ink */
+  --bg: #05060a;
+  --bg-deep: #03040a;
+  --ink: #eaeefb;
+  --ink-dim: rgba(234, 238, 251, 0.66);
+  --ink-faint: rgba(234, 238, 251, 0.4);
+  --ink-ghost: rgba(234, 238, 251, 0.16);
+
+  /* lines + glass */
+  --line: rgba(150, 180, 255, 0.14);
+  --line-bright: rgba(150, 180, 255, 0.32);
+  --panel: rgba(11, 15, 27, 0.66);
+  --panel-solid: rgba(9, 12, 22, 0.92);
+  --panel-border: rgba(150, 180, 255, 0.16);
+  --glass-blur: 22px;
+
+  /* a neutral accent used where no family color applies */
+  --accent: #8ea2ff;
+
+  --radius: 16px;
+  --radius-sm: 11px;
+  --radius-pill: 999px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shadow-panel: 0 24px 70px -18px rgba(0, 0, 0, 0.75),
+    0 0 0 1px var(--panel-border) inset;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg-deep);
+  /* a faint deep-space glow that sits behind the canvas + transparent UI */
+  background-image:
+    radial-gradient(120% 90% at 50% -10%, #0b1024 0%, transparent 55%),
+    radial-gradient(90% 70% at 100% 110%, #120a24 0%, transparent 60%);
+  overflow: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  position: relative;
+  isolation: isolate;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(120, 200, 255, 0.28);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* thin tinted scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(150, 180, 255, 0.28) transparent;
+}
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(150, 180, 255, 0.22);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 180, 255, 0.4);
+  background-clip: padding-box;
+}
+
+/* utilities */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
