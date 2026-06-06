@@ -3,6 +3,7 @@ import AtlasLoading from "./ui/AtlasLoading";
 import Brand from "./ui/Brand";
 import SearchBox from "./ui/SearchBox";
 import ViewToggle from "./ui/ViewToggle";
+import LabelSlider from "./ui/LabelSlider";
 import FamilyLegend from "./ui/FamilyLegend";
 import DetailPanel from "./ui/DetailPanel";
 import ControlsHint from "./ui/ControlsHint";
@@ -61,7 +62,12 @@ export default function App() {
       <Brand />
       <SearchBox />
       <ViewToggle />
-      {showAtlas && <FamilyLegend />}
+      {showAtlas && (
+        <div className="dock">
+          <LabelSlider />
+          <FamilyLegend />
+        </div>
+      )}
       <DetailPanel />
       {showAtlas && <ControlsHint />}
       {showAtlas && <Intro />}

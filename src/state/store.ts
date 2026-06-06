@@ -9,6 +9,12 @@ import type { FamilyId } from "../data/genres";
 
 export type View = "atlas" | "list";
 
+// How many star titles stay visible:
+//  - "hover":  only the star under the cursor is named
+//  - "family": opening a constellation names every genre in that family
+//  - "all":    every star is named, always
+export type LabelMode = "hover" | "family" | "all";
+
 interface AtlasState {
   selectedId: string | null;
   hoveredId: string | null;
@@ -17,6 +23,7 @@ interface AtlasState {
   reducedMotion: boolean;
   webglOk: boolean;
   view: View;
+  labelMode: LabelMode;
   searchOpen: boolean;
   synthId: string | null; // genre whose synth demo is currently playing
 
@@ -28,6 +35,7 @@ interface AtlasState {
   setReducedMotion: (v: boolean) => void;
   setWebglOk: (v: boolean) => void;
   setView: (v: View) => void;
+  setLabelMode: (m: LabelMode) => void;
   setSearchOpen: (v: boolean) => void;
   setSynthId: (id: string | null) => void;
 }
@@ -40,6 +48,7 @@ export const useAtlas = create<AtlasState>((set) => ({
   reducedMotion: false,
   webglOk: true,
   view: "atlas",
+  labelMode: "hover",
   searchOpen: false,
   synthId: null,
 
@@ -52,6 +61,7 @@ export const useAtlas = create<AtlasState>((set) => ({
   setReducedMotion: (v) => set({ reducedMotion: v }),
   setWebglOk: (v) => set({ webglOk: v }),
   setView: (v) => set({ view: v }),
+  setLabelMode: (m) => set({ labelMode: m }),
   setSearchOpen: (v) => set({ searchOpen: v }),
   setSynthId: (id) => set({ synthId: id }),
 }));
