@@ -1,0 +1,60 @@
+name: Chromatic
+
+# Publish Storybook to Chromatic and run visual regression tests, with TurboSnap
+# (only snapshot the stories actually affected by each change).
+#
+# Triggered on push to every branch, NOT on pull_request. TurboSnap depends on
+# the real commit SHA to locate the baseline; the pull_request event checks out
+# a synthetic merge commit, which breaks baseline tracking. The Chromatic GitHub
+# app still surfaces UI Tests / UI Review / Storybook Publish checks on the PR
+# from these push builds.
+
+on:
+  push:
+    branches:
+      - '**'
+
+# Cancel superseded runs on the same ref to save build minutes.
+concurrency:
+  group: chromatic-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromatic:
+    name: Run Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # TurboSnap needs full git history to find the baseline commit.
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        # Reads the version from package.json "packageManager" (pnpm@10.33.0).
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # TurboSnap: only snapshot stories affected by the diff. Relies on the
+          # preview-stats.json that `build-storybook --stats-json` emits (wired
+          # in package.json). Falls back to a full build when Storybook config
+          # or dependencies change.
+          onlyChanged: true
+          # Don't fail the check on visual changes — review/accept them in the
+          # Chromatic UI instead of blocking.
+          exitZeroOnChanges: true
+          # Chromatic GitHub app posts its own commit statuses; return right
+          # after upload so the Action job doesn't block on snapshot diffing.
+          exitOnceUploaded: true
