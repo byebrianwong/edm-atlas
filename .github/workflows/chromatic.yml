@@ -1,0 +1,51 @@
+name: Chromatic
+
+# Publish Storybook to Chromatic and run visual regression tests.
+# Runs on every PR (preview baseline) and on pushes to main (accepted baseline).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel superseded runs on the same ref to save build minutes.
+concurrency:
+  group: chromatic-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromatic:
+    name: Run Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Chromatic needs full git history to compute baselines/TurboSnap.
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        # Reads the version from package.json "packageManager" (pnpm@10.33.0).
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # Builds Storybook via the "build-storybook" script automatically.
+          # Don't fail the check on visual changes — review/accept them in the
+          # Chromatic UI instead of blocking the PR.
+          exitZeroOnChanges: true
+          # Project is linked to the Chromatic GitHub app, which posts its own
+          # commit status. Return right after upload so the Action job doesn't
+          # block on snapshot diffing.
+          exitOnceUploaded: true
