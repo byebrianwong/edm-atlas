@@ -1,12 +1,18 @@
 name: Chromatic
 
-# Publish Storybook to Chromatic and run visual regression tests.
-# Runs on every PR (preview baseline) and on pushes to main (accepted baseline).
+# Publish Storybook to Chromatic and run visual regression tests, with TurboSnap
+# (only snapshot the stories actually affected by each change).
+#
+# Triggered on push to every branch, NOT on pull_request. TurboSnap depends on
+# the real commit SHA to locate the baseline; the pull_request event checks out
+# a synthetic merge commit, which breaks baseline tracking. The Chromatic GitHub
+# app still surfaces UI Tests / UI Review / Storybook Publish checks on the PR
+# from these push builds.
 
 on:
   push:
-    branches: [main]
-  pull_request:
+    branches:
+      - '**'
 
 # Cancel superseded runs on the same ref to save build minutes.
 concurrency:
@@ -21,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # Chromatic needs full git history to compute baselines/TurboSnap.
+          # TurboSnap needs full git history to find the baseline commit.
           fetch-depth: 0
 
       - name: Setup pnpm
@@ -41,11 +47,14 @@ jobs:
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          # Builds Storybook via the "build-storybook" script automatically.
+          # TurboSnap: only snapshot stories affected by the diff. Relies on the
+          # preview-stats.json that `build-storybook --stats-json` emits (wired
+          # in package.json). Falls back to a full build when Storybook config
+          # or dependencies change.
+          onlyChanged: true
           # Don't fail the check on visual changes — review/accept them in the
-          # Chromatic UI instead of blocking the PR.
+          # Chromatic UI instead of blocking.
           exitZeroOnChanges: true
-          # Project is linked to the Chromatic GitHub app, which posts its own
-          # commit status. Return right after upload so the Action job doesn't
-          # block on snapshot diffing.
+          # Chromatic GitHub app posts its own commit statuses; return right
+          # after upload so the Action job doesn't block on snapshot diffing.
           exitOnceUploaded: true
