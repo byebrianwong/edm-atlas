@@ -1,9 +1,18 @@
 /**
  * Additional example tracks per genre, beyond the two classics in genres.ts.
- * Each genre gets 4+ more: a couple of essential picks plus recent (2023+)
- * tracks flagged `recent`. Resolved Spotify IDs live in spotifyIds.ts, aligned
- * to the combined order (genres.ts examples first, then these). Regenerate IDs
- * with scripts/resolve-spotify.ts.
+ *
+ * Curation rules:
+ *  - At most ONE track per artist as the *main* (lead) artist within a genre,
+ *    counting the genres.ts classics too. The same artist may reappear in a
+ *    genre as a secondary/featured credit, and may lead in other genres.
+ *  - The biggest, most representative artists for each genre are included, with
+ *    room for essential deep cuts. Popular genres run long (10+ tracks).
+ *  - `recent` flags 2023+ releases; the detail panel groups "Hear it" vs
+ *    "Recent tracks".
+ *
+ * Resolved Spotify IDs live in spotifyIds.ts, aligned to the combined order
+ * (genres.ts examples first, then these). Regenerate IDs with
+ * scripts/resolve-spotify.ts (official Spotify Web API).
  */
 
 export type ExtraTrack = { artist: string; title: string; recent?: boolean };
@@ -12,62 +21,85 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   // ---------- House ----------
   house: [
     { artist: "Robin S", title: "Show Me Love" },
+    { artist: "Crystal Waters", title: "Gypsy Woman (She's Homeless)" },
     { artist: "Inner City", title: "Good Life" },
-    { artist: "Disco Lines", title: "Baby Girl" },
+    { artist: "MK", title: "17" },
+    { artist: "Disclosure", title: "Latch" },
+    { artist: "Fred again.. & Obongjayar", title: "adore u", recent: true },
+    { artist: "Disco Lines", title: "Baby Girl", recent: true },
     { artist: "John Summit & Hayla", title: "Where You Are", recent: true },
     { artist: "Dom Dolla & Nelly Furtado", title: "Eat Your Man", recent: true },
   ],
   tech: [
-    { artist: "FISHER", title: "You Little Beauty" },
     { artist: "Solomun", title: "Kackvogel" },
+    { artist: "James Hype & Miggy Dela Rosa", title: "Ferrari" },
+    { artist: "ACRAZE", title: "Do It To It" },
+    { artist: "Green Velvet", title: "La La Land" },
+    { artist: "John Summit", title: "Deep End" },
     { artist: "Mau P", title: "Gimme That Bounce", recent: true },
     { artist: "Cloonee & Young M.A", title: "Stephanie", recent: true },
+    { artist: "Dom Dolla", title: "Saving Up", recent: true },
   ],
   deep: [
     { artist: "Maya Jane Coles", title: "What They Say" },
     { artist: "Duke Dumont", title: "Need U (100%)" },
+    { artist: "Bicep", title: "Glue" },
     { artist: "Gorgon City & DRAMA", title: "You've Done Enough", recent: true },
     { artist: "Vintage Culture & Gabss", title: "Lost", recent: true },
   ],
   prog: [
-    { artist: "deadmau5 & Kaskade", title: "I Remember" },
-    { artist: "Eric Prydz", title: "Pjanoo" },
+    { artist: "Kaskade", title: "Atmosphere" },
+    { artist: "Avicii", title: "Levels" },
+    { artist: "Swedish House Mafia", title: "Don't You Worry Child" },
+    { artist: "Alesso", title: "Heroes (We Could Be)" },
+    { artist: "Yotto", title: "The One You Left Behind" },
     { artist: "Anyma & Chris Avantgarde", title: "Eternity", recent: true },
     { artist: "ARTBAT", title: "Afterparty", recent: true },
   ],
   melodic: [
-    { artist: "Ben Böhmer", title: "Cappadocia" },
     { artist: "CamelPhat & Elderbrook", title: "Cola" },
+    { artist: "RÜFÜS DU SOL", title: "Innerbloom" },
+    { artist: "Stephan Bodzin", title: "Singularity" },
+    { artist: "Adriatique & WhoMadeWho", title: "Miracle" },
     { artist: "Anyma & Grimes", title: "Welcome To The Opera", recent: true },
     { artist: "Keinemusik", title: "Say What", recent: true },
   ],
   futurehouse: [
     { artist: "Don Diablo", title: "Cutting Shapes" },
-    { artist: "Tchami", title: "Adieu" },
+    { artist: "Mike Williams", title: "Sweet & Sour" },
+    { artist: "Curbi", title: "Discharge" },
+    { artist: "Brooks", title: "Limbo" },
     { artist: "Aluna, Tchami & Kareen Lomax", title: "Running Blind", recent: true },
-    { artist: "Oliver Heldens", title: "Physical", recent: true },
   ],
   bigroom: [
     { artist: "Hardwell", title: "Spaceman" },
     { artist: "Dimitri Vegas & Like Mike", title: "Mammoth" },
-    { artist: "Martin Garrix", title: "Wherever You Are", recent: true },
-    { artist: "Martin Garrix", title: "Gravity", recent: true },
+    { artist: "Afrojack", title: "Take Over Control" },
+    { artist: "Showtek", title: "Booyah" },
+    { artist: "Nicky Romero", title: "Toulouse" },
+    { artist: "David Guetta & Bebe Rexha", title: "I'm Good (Blue)" },
+    { artist: "Tiësto", title: "Lay Low", recent: true },
   ],
   basshouse: [
-    { artist: "Jauz & Ephwurd", title: "Rock The Party" },
     { artist: "JOYRYDE", title: "HARI KARI" },
+    { artist: "Malaa", title: "Notorious" },
+    { artist: "Habstrakt", title: "Chicken Soup" },
     { artist: "Wax Motif", title: "La Samba", recent: true },
     { artist: "ZHU & Wax Motif", title: "Better Recognize", recent: true },
   ],
   electrohouse: [
-    { artist: "Justice", title: "DVNO" },
     { artist: "Gesaffelstein", title: "Pursuit" },
-    { artist: "Justice", title: "One Night/All Night", recent: true },
-    { artist: "Justice", title: "Saturnine", recent: true },
+    { artist: "Calvin Harris", title: "Feel So Close" },
+    { artist: "Madeon", title: "Icarus" },
+    { artist: "Porter Robinson", title: "Language" },
+    { artist: "Wolfgang Gartner", title: "Space Junk" },
+    { artist: "Zedd", title: "Clarity" },
+    { artist: "The Bloody Beetroots", title: "Warp 1.9" },
   ],
   frenchhouse: [
-    { artist: "Daft Punk", title: "Around the World" },
     { artist: "Cassius", title: "Toop Toop" },
+    { artist: "Modjo", title: "Lady (Hear Me Tonight)" },
+    { artist: "Breakbot", title: "Baby I'm Yours" },
     { artist: "Purple Disco Machine & Kungs", title: "Substitution", recent: true },
     { artist: "Folamour", title: "Fearless", recent: true },
   ],
@@ -80,7 +112,8 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   tropical: [
     { artist: "Sam Feldt", title: "Show Me Love" },
     { artist: "Lost Frequencies", title: "Are You With Me" },
-    { artist: "Kygo", title: "Freeze", recent: true },
+    { artist: "Klingande", title: "Jubel" },
+    { artist: "Felix Jaehn", title: "Ain't Nobody (Loves Me Better)" },
     { artist: "Robin Schulz", title: "Speechless", recent: true },
   ],
 
@@ -88,6 +121,10 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   techno: [
     { artist: "Robert Hood", title: "Minus" },
     { artist: "Joey Beltram", title: "Energy Flash" },
+    { artist: "Amelie Lens", title: "In My Mind" },
+    { artist: "Boris Brejcha", title: "Gravity" },
+    { artist: "Nina Kraviz", title: "Ghetto Kraviz" },
+    { artist: "Carl Cox", title: "I Want You (Forever)" },
     { artist: "Sara Landry & Shlømo", title: "Play With Me", recent: true },
     { artist: "I Hate Models", title: "Forever Melancholia", recent: true },
   ],
@@ -96,6 +133,11 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   trance: [
     { artist: "Tiësto", title: "Adagio For Strings" },
     { artist: "Paul van Dyk", title: "For An Angel" },
+    { artist: "Ferry Corsten", title: "Punk" },
+    { artist: "Gareth Emery", title: "Concrete Angel" },
+    { artist: "Cosmic Gate", title: "Exploration of Space" },
+    { artist: "Robert Miles", title: "Children" },
+    { artist: "Darude", title: "Sandstorm" },
     {
       artist: "Armin van Buuren, Ferry Corsten, Rank 1 & Ruben de Ronde",
       title: "Destination (A State of Trance 2024 Anthem)",
@@ -106,7 +148,7 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   psytrance: [
     { artist: "Infected Mushroom", title: "Becoming Insane" },
     { artist: "Hilight Tribe", title: "Free Tibet (Vini Vici Remix)" },
-    { artist: "Infected Mushroom", title: "Release Me REBORN", recent: true },
+    { artist: "Ace Ventura", title: "Presence" },
     {
       artist: "Captain Hook & Ace Ventura",
       title: "Space Tube 25 (Ace Ventura Remix)",
@@ -117,7 +159,11 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   // ---------- Breakbeat & jungle ----------
   dnb: [
     { artist: "Chase & Status & Liam Bailey", title: "Blind Faith" },
-    { artist: "Sub Focus & Dimension", title: "Desire" },
+    { artist: "Wilkinson", title: "Afterglow" },
+    { artist: "Netsky", title: "Rio" },
+    { artist: "Dimension", title: "UK" },
+    { artist: "Andy C", title: "Heartbeat Loud" },
+    { artist: "Sigma", title: "Nobody to Love" },
     {
       artist: "Nia Archives",
       title: "Sunrise Bang Ur Head Against Tha Wall",
@@ -127,19 +173,22 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   ],
   ukg: [
     { artist: "Craig David", title: "Fill Me In" },
+    { artist: "Sweet Female Attitude", title: "Flowers" },
     { artist: "Sammy Virji & Flowdan", title: "Shella Verse", recent: true },
     { artist: "Interplanetary Criminal & Blanco", title: "Races", recent: true },
     { artist: "Conducta", title: "Stratus", recent: true },
   ],
   bigbeat: [
     { artist: "The Prodigy", title: "Firestarter" },
-    { artist: "Fatboy Slim", title: "Praise You" },
-    { artist: "The Chemical Brothers", title: "No Reason", recent: true },
+    { artist: "The Crystal Method", title: "Born Too Slow" },
+    { artist: "Propellerheads", title: "Spybreak!" },
+    { artist: "Groove Armada", title: "I See You Baby" },
     { artist: "Overmono", title: "So U Kno", recent: true },
   ],
   jungle: [
-    { artist: "Goldie", title: "Terminator" },
     { artist: "M-Beat & General Levy", title: "Incredible" },
+    { artist: "LTJ Bukem", title: "Horizons" },
+    { artist: "Congo Natty", title: "Jungle Souljah" },
     { artist: "Nia Archives", title: "Forbidden Feelingz", recent: true },
     { artist: "SHERELLE", title: "With A Vengeance", recent: true },
   ],
@@ -148,51 +197,71 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   dubstep: [
     { artist: "Rusko", title: "Cockney Thug (Caspa Remix)" },
     { artist: "Benga & Coki", title: "Night" },
-    { artist: "Skrillex, Fred again.. & Flowdan", title: "Rumble", recent: true },
+    { artist: "Nero", title: "Promises" },
+    { artist: "Excision & Space Laces", title: "Throwin' Elbows" },
+    { artist: "Virtual Riot", title: "Energy Drink" },
+    { artist: "Zomboy", title: "Nuclear (Hands Up)" },
+    { artist: "Subtronics", title: "Scream Saver" },
     { artist: "SVDDEN DEATH", title: "Dark Matters", recent: true },
   ],
   futurebass: [
     { artist: "Porter Robinson", title: "Something Comforting" },
     { artist: "ILLENIUM", title: "Fragments" },
+    { artist: "The Chainsmokers", title: "Roses" },
+    { artist: "Marshmello", title: "Alone" },
+    { artist: "ODESZA", title: "Say My Name" },
+    { artist: "Louis The Child", title: "It's Strange" },
+    { artist: "Jai Wolf", title: "Indian Summer" },
     { artist: "Said The Sky", title: "Together Again", recent: true },
-    { artist: "ILLENIUM & Hayla", title: "In My Arms", recent: true },
   ],
   trap: [
-    { artist: "RL Grime", title: "Pressure" },
-    { artist: "Knock2", title: "dashstar*" },
-    { artist: "ISOKNOCK", title: "TROUBLE", recent: true },
-    { artist: "ISOxo, Knock2 & RL Grime", title: "SMACK TALK", recent: true },
+    { artist: "TroyBoi", title: "Do You?" },
+    { artist: "NGHTMRE", title: "Street" },
+    { artist: "What So Not", title: "High You Are" },
+    { artist: "Flosstradamus", title: "Mosh Pit" },
+    { artist: "Carnage", title: "Toca" },
+    { artist: "Knock2", title: "dashstar*", recent: true },
+    { artist: "ISOxo", title: "dontstopme!", recent: true },
   ],
   meldubstep: [
-    { artist: "Seven Lions, ILLENIUM & Said The Sky", title: "Rush Over Me" },
-    { artist: "Seven Lions", title: "Days to Come" },
-    { artist: "ILLENIUM & Teddy Swims", title: "All That Really Matters", recent: true },
-    { artist: "Seven Lions, Dabin & JIM", title: "Ones I Used To Love", recent: true },
+    { artist: "SLANDER", title: "Love Is Gone" },
+    { artist: "Dabin", title: "Alive" },
+    { artist: "Adventure Club", title: "Gold" },
+    { artist: "MitiS", title: "Open Window" },
+    { artist: "Au5", title: "Snowblind" },
+    { artist: "William Black", title: "Deep Blue" },
   ],
   glitchhop: [
-    { artist: "Rezz & deadmau5", title: "Hypnocurrency" },
-    { artist: "The Glitch Mob", title: "Between Two Points" },
-    { artist: "Rezz", title: "Can You See Me?", recent: true },
+    { artist: "Pretty Lights", title: "Finally Moving" },
+    { artist: "GRiZ", title: "Stop Trippin'" },
+    { artist: "CloZee", title: "Koto" },
+    { artist: "Big Gigantic", title: "The Little Things" },
     { artist: "Of The Trees & LYNY", title: "Hollow", recent: true },
   ],
 
   // ---------- Hard dance ----------
   hardstyle: [
-    { artist: "Headhunterz", title: "The Universe Is Ours" },
+    { artist: "Wildstylez", title: "Year Of Summer" },
+    { artist: "Da Tweekaz", title: "Chew Bubblegum" },
+    { artist: "Sub Zero Project", title: "The Project" },
+    { artist: "Noisecontrollers", title: "Diffusion" },
     { artist: "Sefa", title: "1527", recent: true },
-    { artist: "Headhunterz", title: "Live Forever", recent: true },
     { artist: "D-Block & S-te-Fan", title: "Fire", recent: true },
   ],
   happyhardcore: [
-    { artist: "Dougal & Gammer", title: "Your One" },
-    { artist: "Darren Styles, Dougal & Gammer", title: "Stay Young" },
-    { artist: "Gammer", title: "Freaks", recent: true },
-    { artist: "Da Tweekaz & Darren Styles", title: "Hewwego (Darren Styles Remix)", recent: true },
+    { artist: "Darren Styles", title: "Holding On" },
+    { artist: "Gammer", title: "The Drop" },
+    { artist: "Hixxy", title: "Toytown" },
+    {
+      artist: "Da Tweekaz & Darren Styles",
+      title: "Hewwego (Darren Styles Remix)",
+      recent: true,
+    },
   ],
   gabber: [
     { artist: "Paul Elstak", title: "Rainbow in the Sky" },
-    { artist: "Angerfist", title: "Syndicate Of Noise", recent: true },
-    { artist: "Angerfist & Miss K8", title: "Breinbreker", recent: true },
+    { artist: "Miss K8", title: "Hallucin8" },
+    { artist: "Neophyte", title: "Army of Hardcore" },
     { artist: "N-Vitral, BOMBSQUAD & Barber", title: "Game Of Hate", recent: true },
   ],
 
@@ -200,27 +269,31 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   phonk: [
     { artist: "DVRST", title: "Close Eyes" },
     { artist: "INTERWORLD", title: "METAMORPHOSIS" },
+    { artist: "Hensonn", title: "Sahara" },
     { artist: "MoonDeity", title: "Movement", recent: true },
     { artist: "KSLV Noh", title: "Off Track", recent: true },
   ],
   amapiano: [
     { artist: "DBN Gogo", title: "Khuza Gogo" },
-    { artist: "Kabza De Small", title: "iPiano" },
+    { artist: "Focalistic", title: "Ke Star" },
+    { artist: "Young Stunna", title: "Adiwele" },
     { artist: "Tyler ICU & Tumelo_za", title: "Mnike", recent: true },
     { artist: "Tyla", title: "Water", recent: true },
   ],
   moombahton: [
-    { artist: "Major Lazer", title: "Watch Out for This (Bumaye)" },
     { artist: "Sak Noel", title: "Loca People" },
-    { artist: "Dillon Francis & Good Times Ahead", title: "Moombers", recent: true },
-    { artist: "Dillon Francis & Good Times Ahead", title: "Humo", recent: true },
+    { artist: "DJ Snake & Lil Jon", title: "Turn Down for What" },
+    { artist: "Valentino Khan", title: "Deep Down Low" },
+    { artist: "Diplo", title: "Express Yourself" },
+    { artist: "GTA", title: "Red Lips" },
   ],
 
   // ---------- Retro / other ----------
   synthwave: [
     { artist: "Carpenter Brut", title: "Roller Mobster" },
     { artist: "FM-84", title: "Running in the Night" },
-    { artist: "The Midnight", title: "First Night In Paris", recent: true },
+    { artist: "Perturbator", title: "Future Club" },
+    { artist: "Timecop1983", title: "On the Run" },
     { artist: "GUNSHIP", title: "Tech Noir 2", recent: true },
   ],
 };
