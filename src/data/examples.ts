@@ -2,9 +2,9 @@
  * Additional example tracks per genre, beyond the two classics in genres.ts.
  *
  * Curation rules:
- *  - At most ONE track per artist as the *main* (lead) artist within a genre,
- *    counting the genres.ts classics too. The same artist may reappear in a
- *    genre as a secondary/featured credit, and may lead in other genres.
+ *  - An artist usually leads at most one track per genre, but may lead two when
+ *    both are standout, very popular tracks in that genre. The same artist may
+ *    also reappear as a secondary/featured credit, and may lead in other genres.
  *  - The biggest, most representative artists for each genre are included, with
  *    room for essential deep cuts. Popular genres run long (10+ tracks).
  *  - `recent` flags 2023+ releases; the detail panel groups "Hear it" vs
@@ -28,10 +28,9 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "Fred again.. & Obongjayar", title: "adore u", recent: true },
     { artist: "Disco Lines", title: "Baby Girl", recent: true },
     { artist: "John Summit & Hayla", title: "Where You Are", recent: true },
-    { artist: "Dom Dolla & Nelly Furtado", title: "Eat Your Man", recent: true },
   ],
   tech: [
-    { artist: "Solomun", title: "Kackvogel" },
+    { artist: "CamelPhat & Elderbrook", title: "Cola" },
     { artist: "James Hype & Miggy Dela Rosa", title: "Ferrari" },
     { artist: "ACRAZE", title: "Do It To It" },
     { artist: "Green Velvet", title: "La La Land" },
@@ -39,11 +38,12 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "Mau P", title: "Gimme That Bounce", recent: true },
     { artist: "Cloonee & Young M.A", title: "Stephanie", recent: true },
     { artist: "Dom Dolla", title: "Saving Up", recent: true },
+    { artist: "Dom Dolla & Nelly Furtado", title: "Eat Your Man", recent: true },
   ],
   deep: [
     { artist: "Maya Jane Coles", title: "What They Say" },
     { artist: "Duke Dumont", title: "Need U (100%)" },
-    { artist: "Bicep", title: "Glue" },
+    { artist: "Solomun", title: "Kackvogel" },
     { artist: "Gorgon City & DRAMA", title: "You've Done Enough", recent: true },
     { artist: "Vintage Culture & Gabss", title: "Lost", recent: true },
   ],
@@ -52,17 +52,18 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "Avicii", title: "Levels" },
     { artist: "Swedish House Mafia", title: "Don't You Worry Child" },
     { artist: "Alesso", title: "Heroes (We Could Be)" },
+    { artist: "Zedd", title: "Clarity" },
     { artist: "Yotto", title: "The One You Left Behind" },
     { artist: "Anyma & Chris Avantgarde", title: "Eternity", recent: true },
     { artist: "ARTBAT", title: "Afterparty", recent: true },
   ],
   melodic: [
-    { artist: "CamelPhat & Elderbrook", title: "Cola" },
     { artist: "RÜFÜS DU SOL", title: "Innerbloom" },
     { artist: "Stephan Bodzin", title: "Singularity" },
+    { artist: "Tale Of Us", title: "Another Earth" },
+    { artist: "Kölsch", title: "Grey" },
     { artist: "Adriatique & WhoMadeWho", title: "Miracle" },
     { artist: "Anyma & Grimes", title: "Welcome To The Opera", recent: true },
-    { artist: "Keinemusik", title: "Say What", recent: true },
   ],
   futurehouse: [
     { artist: "Don Diablo", title: "Cutting Shapes" },
@@ -73,27 +74,25 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   ],
   bigroom: [
     { artist: "Hardwell", title: "Spaceman" },
-    { artist: "Dimitri Vegas & Like Mike", title: "Mammoth" },
+    { artist: "Dimitri Vegas, MOGUAI & Like Mike", title: "Mammoth" },
     { artist: "Afrojack", title: "Take Over Control" },
     { artist: "Showtek", title: "Booyah" },
     { artist: "Nicky Romero", title: "Toulouse" },
-    { artist: "David Guetta & Bebe Rexha", title: "I'm Good (Blue)" },
-    { artist: "Tiësto", title: "Lay Low", recent: true },
   ],
   basshouse: [
     { artist: "JOYRYDE", title: "HARI KARI" },
     { artist: "Malaa", title: "Notorious" },
-    { artist: "Habstrakt", title: "Chicken Soup" },
+    { artist: "Skrillex & Habstrakt", title: "Chicken Soup" },
     { artist: "Wax Motif", title: "La Samba", recent: true },
     { artist: "ZHU & Wax Motif", title: "Better Recognize", recent: true },
   ],
   electrohouse: [
-    { artist: "Gesaffelstein", title: "Pursuit" },
+    { artist: "Benny Benassi", title: "Satisfaction" },
     { artist: "Calvin Harris", title: "Feel So Close" },
     { artist: "Madeon", title: "Icarus" },
     { artist: "Porter Robinson", title: "Language" },
     { artist: "Wolfgang Gartner", title: "Space Junk" },
-    { artist: "Zedd", title: "Clarity" },
+    { artist: "deadmau5", title: "Ghosts 'n' Stuff" },
     { artist: "The Bloody Beetroots", title: "Warp 1.9" },
   ],
   frenchhouse: [
@@ -104,10 +103,10 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "Folamour", title: "Fearless", recent: true },
   ],
   acidhouse: [
+    { artist: "808 State", title: "Pacific State" },
+    { artist: "A Guy Called Gerald", title: "Voodoo Ray" },
+    { artist: "Armando", title: "Land of Confusion" },
     { artist: "Hardfloor", title: "Acperience 1" },
-    { artist: "Plastikman", title: "Spastik" },
-    { artist: "Hannah Laing", title: "Climax", recent: true },
-    { artist: "Héctor Oaks", title: "Todo El Polvo", recent: true },
   ],
   tropical: [
     { artist: "Sam Feldt", title: "Show Me Love" },
@@ -174,6 +173,7 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
   ukg: [
     { artist: "Craig David", title: "Fill Me In" },
     { artist: "Sweet Female Attitude", title: "Flowers" },
+    { artist: "Overmono", title: "So U Kno" },
     { artist: "Sammy Virji & Flowdan", title: "Shella Verse", recent: true },
     { artist: "Interplanetary Criminal & Blanco", title: "Races", recent: true },
     { artist: "Conducta", title: "Stratus", recent: true },
@@ -183,7 +183,7 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "The Crystal Method", title: "Born Too Slow" },
     { artist: "Propellerheads", title: "Spybreak!" },
     { artist: "Groove Armada", title: "I See You Baby" },
-    { artist: "Overmono", title: "So U Kno", recent: true },
+    { artist: "The Chemical Brothers", title: "Hey Boy Hey Girl" },
   ],
   jungle: [
     { artist: "M-Beat & General Levy", title: "Incredible" },
@@ -205,7 +205,7 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "SVDDEN DEATH", title: "Dark Matters", recent: true },
   ],
   futurebass: [
-    { artist: "Porter Robinson", title: "Something Comforting" },
+    { artist: "Porter Robinson", title: "Sad Machine" },
     { artist: "ILLENIUM", title: "Fragments" },
     { artist: "The Chainsmokers", title: "Roses" },
     { artist: "Marshmello", title: "Alone" },
@@ -252,6 +252,7 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "Darren Styles", title: "Holding On" },
     { artist: "Gammer", title: "The Drop" },
     { artist: "Hixxy", title: "Toytown" },
+    { artist: "Paul Elstak", title: "Rainbow in the Sky" },
     {
       artist: "Da Tweekaz & Darren Styles",
       title: "Hewwego (Darren Styles Remix)",
@@ -259,7 +260,6 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     },
   ],
   gabber: [
-    { artist: "Paul Elstak", title: "Rainbow in the Sky" },
     { artist: "Miss K8", title: "Hallucin8" },
     { artist: "Neophyte", title: "Army of Hardcore" },
     { artist: "N-Vitral, BOMBSQUAD & Barber", title: "Game Of Hate", recent: true },
@@ -281,11 +281,9 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "Tyla", title: "Water", recent: true },
   ],
   moombahton: [
-    { artist: "Sak Noel", title: "Loca People" },
-    { artist: "DJ Snake & Lil Jon", title: "Turn Down for What" },
-    { artist: "Valentino Khan", title: "Deep Down Low" },
-    { artist: "Diplo", title: "Express Yourself" },
-    { artist: "GTA", title: "Red Lips" },
+    { artist: "Dillon Francis", title: "Masta Blasta" },
+    { artist: "Major Lazer", title: "Original Don" },
+    { artist: "Major Lazer", title: "Watch Out For This (Bumaye)" },
   ],
 
   // ---------- Retro / other ----------

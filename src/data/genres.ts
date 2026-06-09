@@ -242,7 +242,7 @@ export const GENRES: Genre[] = [
     signature: "Relentless four-on-the-floor, offbeat sub, sparse delayed stabs.",
     examples: [
       { artist: "Charlotte de Witte", title: "Doppler", spotifyId: null },
-      { artist: "Adam Beyer", title: "Your Mind", spotifyId: null },
+      { artist: "Adam Beyer & Bart Skils", title: "Your Mind", spotifyId: null },
     ],
     related: ["tech", "acidhouse", "trance", "psytrance"],
     weight: 1,
@@ -336,7 +336,7 @@ export const GENRES: Genre[] = [
     bpm: [155, 170],
     typicalBpm: 160,
     unique:
-      "Chopped, intricate amen breakbeats with deep reggae/dub sub bass; the precursor to DnB.",
+      "Chopped, intricate amen breakbeats with deep reggae/dub sub bass; the raw, ragga-led roots of drum & bass.",
     signature: "Heavily edited fast breaks, ghost snares, deep reggae-style sub.",
     examples: [
       { artist: "Shy FX", title: "Original Nuttah", spotifyId: null },
@@ -419,8 +419,9 @@ export const GENRES: Genre[] = [
     bpm: [100, 115],
     typicalBpm: 105,
     unique:
-      "Funky or dark midtempo bass music with gated, stuttering, edited low end.",
-    signature: "Halftime drums around 105 to 110 BPM, glitchy gated bass, dark mood.",
+      "Midtempo bass music with glitchy, stuttering, gated low end — from funky glitch hop to dark midtempo.",
+    signature:
+      "Halftime drums around 100 to 110 BPM, sliced and gated bass, glitchy edits.",
     examples: [
       { artist: "Rezz", title: "Edge", spotifyId: null },
       { artist: "The Glitch Mob", title: "Animus Vox", spotifyId: null },
@@ -505,7 +506,7 @@ export const GENRES: Genre[] = [
     unique:
       "South African style defined by a deep, gliding 'log drum' bass and spacious jazzy chords.",
     signature:
-      "Gliding log-drum bass, shakers, soft four-on-the-floor, airy piano chords.",
+      "Gliding log-drum bass, shakers, broken syncopated kick, airy piano chords.",
     examples: [
       { artist: "Kabza De Small", title: "Sponono", spotifyId: null },
       { artist: "Uncle Waffles", title: "Tanzania", spotifyId: null },
@@ -522,8 +523,8 @@ export const GENRES: Genre[] = [
       "House slowed to around 108 BPM and fused with reggaeton's dembow rhythm.",
     signature: "Dembow clap pattern, big saw stabs, slow heavy groove.",
     examples: [
-      { artist: "Dillon Francis", title: "Get Low", spotifyId: null },
-      { artist: "Major Lazer", title: "Pon de Floor", spotifyId: null },
+      { artist: "Dillon Francis & DJ Snake", title: "Get Low", spotifyId: null },
+      { artist: "Diplo", title: "Express Yourself", spotifyId: null },
     ],
     related: ["trap", "house"],
   },
