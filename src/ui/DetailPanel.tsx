@@ -64,6 +64,29 @@ export default function DetailPanel() {
         </section>
 
         <section className="panel__block">
+          <h3 className="panel__label">History</h3>
+          <p className="panel__history">{g.history}</p>
+          <a
+            className="panel__learn"
+            href={g.learnMore.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn more on {g.learnMore.label}
+            <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+              <path
+                d="M7 17L17 7M9 7h8v8"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+            </svg>
+          </a>
+        </section>
+
+        <section className="panel__block">
           <h3 className="panel__label">Hear it</h3>
           <div className="panel__tracks">
             {g.examples
