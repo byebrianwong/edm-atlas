@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import AtlasLoading from "./ui/AtlasLoading";
 import Brand from "./ui/Brand";
 import SearchBox from "./ui/SearchBox";
@@ -6,6 +7,7 @@ import ViewToggle from "./ui/ViewToggle";
 import LabelSlider from "./ui/LabelSlider";
 import FamilyLegend from "./ui/FamilyLegend";
 import DetailPanel from "./ui/DetailPanel";
+import ArtistPage from "./ui/ArtistPage";
 import ControlsHint from "./ui/ControlsHint";
 import Intro from "./ui/Intro";
 import GenreList from "./ui/GenreList";
@@ -48,6 +50,9 @@ export default function App() {
   }, [selectedId]);
 
   const showAtlas = webglOk && view === "atlas";
+  // The artist page is a full-screen route overlay; suppress the first-run intro
+  // while it's up so a cold deep-link to /artist/:id isn't covered by it.
+  const onArtistRoute = useLocation().pathname.startsWith("/artist/");
 
   return (
     <div className="app">
@@ -69,8 +74,15 @@ export default function App() {
         </div>
       )}
       <DetailPanel />
-      {showAtlas && <ControlsHint />}
-      {showAtlas && <Intro />}
+      {showAtlas && !onArtistRoute && <ControlsHint />}
+      {showAtlas && !onArtistRoute && <Intro />}
+
+      {/* The atlas/list above stays mounted; the artist page is a route overlay
+          so the WebGL context + camera persist while you browse artists. */}
+      <Routes>
+        <Route path="/artist/:id" element={<ArtistPage />} />
+        <Route path="*" element={null} />
+      </Routes>
     </div>
   );
 }

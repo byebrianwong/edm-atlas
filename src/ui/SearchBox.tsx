@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAtlas } from "../state/store";
 import { ATLAS_GENRES } from "../data/atlas";
 import { FAMILY_BY_ID } from "../data/families";
+import { ARTISTS_FULL, genreChip } from "../data/artistsAtlas";
 
 function SearchIcon() {
   return (
@@ -12,11 +14,17 @@ function SearchIcon() {
   );
 }
 
-/** Search-and-fly: filter the 31 genres by name/family and select one. "/" opens. */
+type Result =
+  | { kind: "genre"; id: string; name: string; tag: string; color: string; score: number }
+  | { kind: "artist"; id: string; name: string; tag: string; color: string; score: number };
+
+/** Search-and-fly: filter genres + artists. Genres select a star; artists open
+ *  /artist/:id. "/" opens the box. */
 export default function SearchBox() {
   const open = useAtlas((s) => s.searchOpen);
   const setOpen = useAtlas((s) => s.setSearchOpen);
   const select = useAtlas((s) => s.select);
+  const navigate = useNavigate();
   const [q, setQ] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -40,16 +48,42 @@ export default function SearchBox() {
     if (open) inputRef.current?.focus();
   }, [open]);
 
-  const results = useMemo(() => {
+  const results = useMemo<Result[]>(() => {
     const t = q.trim().toLowerCase();
     if (!t) return [];
-    return ATLAS_GENRES.filter((g) =>
+
+    const genres: Result[] = ATLAS_GENRES.filter((g) =>
       `${g.name} ${g.family}`.toLowerCase().includes(t),
-    ).slice(0, 7);
+    ).map((g) => ({
+      kind: "genre",
+      id: g.id,
+      name: g.name,
+      tag: FAMILY_BY_ID[g.family].short,
+      color: FAMILY_BY_ID[g.family].color,
+      score: g.name.toLowerCase().startsWith(t) ? 0 : 1,
+    }));
+
+    const artists: Result[] = ARTISTS_FULL.filter(
+      (a) =>
+        a.name.toLowerCase().includes(t) ||
+        a.aka.some((k) => k.toLowerCase().includes(t)),
+    ).map((a) => ({
+      kind: "artist",
+      id: a.id,
+      name: a.name,
+      tag: "Artist",
+      color: genreChip(a.genres[0] ?? "")?.color ?? "var(--accent)",
+      score: a.name.toLowerCase().startsWith(t) ? 0 : 1,
+    }));
+
+    return [...artists, ...genres]
+      .sort((a, b) => a.score - b.score || a.name.localeCompare(b.name))
+      .slice(0, 8);
   }, [q]);
 
-  const pick = (id: string) => {
-    select(id);
+  const pick = (r: Result) => {
+    if (r.kind === "artist") navigate(`/artist/${r.id}`);
+    else select(r.id);
     setOpen(false);
   };
 
@@ -62,7 +96,7 @@ export default function SearchBox() {
             setQ("");
             setOpen(true);
           }}
-          aria-label="Search genres"
+          aria-label="Search genres and artists"
         >
           <SearchIcon />
           <span>Search</span>
@@ -76,11 +110,11 @@ export default function SearchBox() {
               ref={inputRef}
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search 31 genres…"
+              placeholder="Search genres & artists…"
               onKeyDown={(e) => {
-                if (e.key === "Enter" && results[0]) pick(results[0].id);
+                if (e.key === "Enter" && results[0]) pick(results[0]);
               }}
-              aria-label="Search genres"
+              aria-label="Search genres and artists"
             />
             <button
               className="search__close"
@@ -92,18 +126,15 @@ export default function SearchBox() {
           </div>
           {results.length > 0 && (
             <ul className="search__results">
-              {results.map((g) => {
-                const f = FAMILY_BY_ID[g.family];
-                return (
-                  <li key={g.id}>
-                    <button onClick={() => pick(g.id)}>
-                      <span className="search__dot" style={{ background: f.color }} />
-                      <span className="search__name">{g.name}</span>
-                      <em className="mono">{f.short}</em>
-                    </button>
-                  </li>
-                );
-              })}
+              {results.map((r) => (
+                <li key={`${r.kind}:${r.id}`}>
+                  <button onClick={() => pick(r)}>
+                    <span className="search__dot" style={{ background: r.color }} />
+                    <span className="search__name">{r.name}</span>
+                    <em className="mono">{r.tag}</em>
+                  </button>
+                </li>
+              ))}
             </ul>
           )}
         </div>
