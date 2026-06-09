@@ -12,9 +12,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --stats-json",
     "chromatic": "chromatic",
-    "resolve:spotify": "node scripts/resolve-spotify.ts",
-    "resolve:artists": "node scripts/resolve-artists-spotify.ts",
-    "resolve:beatport": "node scripts/resolve-beatport.ts"
+    "resolve:spotify": "node --env-file-if-exists=.env scripts/resolve-spotify.ts",
+    "resolve:artists": "node --env-file-if-exists=.env scripts/resolve-artists-spotify.ts",
+    "resolve:beatport": "node --env-file-if-exists=.env scripts/resolve-beatport.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
