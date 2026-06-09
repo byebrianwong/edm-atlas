@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Local secrets — Spotify API credentials for the resolve:* scripts.
+# Never commit. Copy .env.example to .env and fill in real values.
+.env
+.env.*
+!.env.example
+
 # Lockfiles — this repo uses pnpm; reject stray npm/yarn lockfiles
 package-lock.json
 yarn.lock
