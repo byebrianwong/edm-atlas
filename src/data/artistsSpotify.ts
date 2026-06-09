@@ -769,6 +769,10 @@ export const ARTIST_SPOTIFY: Record<string, SpotifyArtistData> = {
       {
         "title": "Time",
         "spotifyId": "4d2Gndzn9dnmUC8jIzI9d4"
+      },
+      {
+        "title": "Dark Song",
+        "spotifyId": "4O2xx1GL1WIhqZIwIJauPY"
       }
     ]
   },
@@ -1617,6 +1621,10 @@ export const ARTIST_SPOTIFY: Record<string, SpotifyArtistData> = {
       {
         "title": "Faith",
         "spotifyId": "2RFUtPwlsXEL1QLFQWAJjd"
+      },
+      {
+        "title": "Walk Me Home",
+        "spotifyId": "5fWRLdgfMlbKDncAhdN9zI"
       }
     ]
   },
