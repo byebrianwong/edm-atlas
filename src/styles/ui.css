@@ -519,10 +519,37 @@
   margin-left: 6px;
   vertical-align: middle;
 }
-.panel__signature {
+.panel__signature,
+.panel__history {
   font-size: 13.5px;
   line-height: 1.55;
   color: var(--ink-dim);
+}
+.panel__learn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 11px;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--fam) 72%, var(--ink-dim));
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: 0.18s var(--ease);
+}
+.panel__learn:hover {
+  color: var(--fam);
+  border-bottom-color: color-mix(in srgb, var(--fam) 55%, transparent);
+}
+.panel__learn svg {
+  opacity: 0.85;
+  transition: transform 0.18s var(--ease);
+}
+.panel__learn:hover svg {
+  transform: translate(1px, -1px);
 }
 .panel__tracks {
   display: flex;
