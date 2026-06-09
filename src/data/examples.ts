@@ -52,6 +52,7 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "Avicii", title: "Levels" },
     { artist: "Swedish House Mafia", title: "Don't You Worry Child" },
     { artist: "Alesso", title: "Heroes (We Could Be)" },
+    { artist: "Zedd", title: "Clarity" },
     { artist: "Yotto", title: "The One You Left Behind" },
     { artist: "Anyma & Chris Avantgarde", title: "Eternity", recent: true },
     { artist: "ARTBAT", title: "Afterparty", recent: true },
@@ -91,7 +92,7 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "Madeon", title: "Icarus" },
     { artist: "Porter Robinson", title: "Language" },
     { artist: "Wolfgang Gartner", title: "Space Junk" },
-    { artist: "Zedd", title: "Clarity" },
+    { artist: "deadmau5", title: "Ghosts 'n' Stuff" },
     { artist: "The Bloody Beetroots", title: "Warp 1.9" },
   ],
   frenchhouse: [
@@ -204,7 +205,7 @@ export const MORE_EXAMPLES: Record<string, ExtraTrack[]> = {
     { artist: "SVDDEN DEATH", title: "Dark Matters", recent: true },
   ],
   futurebass: [
-    { artist: "Porter Robinson", title: "Something Comforting" },
+    { artist: "Porter Robinson", title: "Sad Machine" },
     { artist: "ILLENIUM", title: "Fragments" },
     { artist: "The Chainsmokers", title: "Roses" },
     { artist: "Marshmello", title: "Alone" },

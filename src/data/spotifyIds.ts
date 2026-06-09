@@ -50,6 +50,7 @@ export const SPOTIFY_IDS: Record<string, (string | null)[]> = {
     "5UqCQaDshqbIk3pkhy4Pjg",
     "2V65y3PX4DkRhy1djlxd9p",
     "3zU9rdflI65tK4dkkNSp77",
+    "60wwxj6Dd9NJlirf84wr2c",
     "4B6OuQJgX3vZcKozQ5L7rB",
     "1GBBbKOarAJ38HwIfLcOji",
     "72fsISRF1G1vDUVPwbTgMO"
@@ -99,7 +100,7 @@ export const SPOTIFY_IDS: Record<string, (string | null)[]> = {
     "1pUsdir2xhSxP0RyBe9lLH",
     "3NRDLYyqIXja0UElvdzjkB",
     "3WtVqbOC2ze5xh0MsegPwS",
-    "60wwxj6Dd9NJlirf84wr2c",
+    "4ua0IepBEISCWwF8dTJvcU",
     "0HIruANJzlQkYwlpvh8cn6"
   ],
   "frenchhouse": [
@@ -216,7 +217,7 @@ export const SPOTIFY_IDS: Record<string, (string | null)[]> = {
   "futurebass": [
     "2ZYz5aPLnEkGR1DfWGZGn6",
     "6jq6rcOikCZAmjliAgAmfT",
-    "4yiZRvxlnnof4pKzxXGUpc",
+    "1JY6B9ILvmRla2IKKRZvnH",
     "0qH4xYxCrvqO86YyLbkTrB",
     "3vv9phIu6Y1vX3jcqaGz5Z",
     "3MEYFivt6bilQ9q9mFWZ4g",
