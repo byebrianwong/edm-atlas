@@ -495,7 +495,7 @@ export const ARTISTS: SeedArtist[] = [
     genres: ["melodic", "techno"],
     blurb: "Afterlife founders who codified the dark, emotive melodic-techno sound.",
     topTracks: [
-      { title: "Unite", genres: ["melodic", "techno"] },
+      { title: "Dark Song", genres: ["melodic", "techno"] },
       { title: "Nova", genres: ["melodic", "techno"] },
       { title: "Time", genres: ["melodic", "techno"] },
     ],
@@ -1064,7 +1064,7 @@ export const ARTISTS: SeedArtist[] = [
     blurb: "Colorado producer of pretty, piano-led melodic bass.",
     topTracks: [
       { title: "Faith", genres: ["meldubstep"] },
-      { title: "Where I Belong", genres: ["meldubstep", "futurebass"] },
+      { title: "Walk Me Home", genres: ["meldubstep", "futurebass"] },
     ],
   },
   {
