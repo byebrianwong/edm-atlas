@@ -38,9 +38,9 @@ export const WithResults: Story = {
   parameters: { atlas: { searchOpen: true } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = await canvas.findByPlaceholderText(/Search 31 genres/);
+    const input = await canvas.findByPlaceholderText(/Search genres/i);
     await userEvent.type(input, "house", { delay: 40 });
-    // The matching genres surface as a result list.
-    await expect(await canvas.findByText("Tech house")).toBeInTheDocument();
+    // The matching genres surface as a result list (capped at the top hits).
+    await expect(await canvas.findByText("Deep house")).toBeInTheDocument();
   },
 };
