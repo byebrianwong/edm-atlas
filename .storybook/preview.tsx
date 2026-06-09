@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react-vite";
+import { MemoryRouter } from "react-router-dom";
 import { useAtlas } from "../src/state/store";
 import theme from "./theme";
 
@@ -65,7 +66,10 @@ const preview: Preview = {
               "radial-gradient(90% 70% at 100% 110%, #120a24 0%, transparent 60%)",
           }}
         />
-        <Story />
+        {/* SearchBox (and anything else routing-aware) needs a Router context. */}
+        <MemoryRouter>
+          <Story />
+        </MemoryRouter>
       </>
     ),
   ],
