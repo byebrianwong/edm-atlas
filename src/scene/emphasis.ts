@@ -7,7 +7,7 @@
  * dims everything outside the chosen family. Otherwise: calm baseline.
  */
 
-import { NEIGHBORS } from "../data/graph";
+import { NEIGHBORS, FAMILY_MAIN } from "../data/graph";
 import { GENRE_BY_ID } from "../data/genres";
 import type { FamilyId } from "../data/genres";
 import type { LabelMode } from "../state/store";
@@ -67,9 +67,10 @@ export function edgeTarget(
 /**
  * Target opacity for a star's *always-on* name label, driven by the title
  * slider. "hover" keeps the ambient layer dark (only the rich hover card shows);
- * "family" reveals every name in the opened/filtered family; "all" reveals
- * everything. In every mode a live hover spotlights its own neighborhood and
- * dims the rest, so the names track the way the stars themselves dim.
+ * "family" names the main genre of every colored cluster, then every name in the
+ * one constellation you open (select/filter); "all" reveals everything. In every
+ * mode a live hover spotlights its own neighborhood and dims the rest, so the
+ * names track the way the stars themselves dim.
  */
 export function ambientLabelTarget(
   id: string,
@@ -86,7 +87,11 @@ export function ambientLabelTarget(
     const activeFamily =
       s.familyFilter ??
       (s.selectedId ? GENRE_BY_ID[s.selectedId]?.family ?? null : null);
-    visible = activeFamily != null && family === activeFamily;
+    visible =
+      activeFamily != null
+        ? family === activeFamily
+        : // Nothing opened yet: name the lead genre of each colored section.
+          FAMILY_MAIN[family] === id;
   }
   if (!visible) return 0;
 
