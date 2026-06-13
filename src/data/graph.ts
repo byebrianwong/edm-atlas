@@ -81,6 +81,31 @@ export function starSize(g: Genre): number {
   return (0.95 + degree * 0.12) * (1 + (g.weight ?? 0) * 0.85);
 }
 
+/**
+ * The single "main" genre id of each family — its brightest, most foundational
+ * star (the weighted anchor where one exists, else the best-connected member).
+ * Ties resolve to the earliest-listed genre, keeping the pick deterministic.
+ * Used to label one representative star per colored cluster in "family" mode.
+ */
+export const FAMILY_MAIN: Record<FamilyId, string> = (() => {
+  const out = {} as Record<FamilyId, string>;
+  for (const fid of FAMILY_IDS) {
+    const members = GENRES.filter((g) => g.family === fid);
+    if (members.length === 0) continue;
+    let best = members[0];
+    let bestSize = starSize(best);
+    for (const g of members.slice(1)) {
+      const sz = starSize(g);
+      if (sz > bestSize) {
+        best = g;
+        bestSize = sz;
+      }
+    }
+    out[fid] = best.id;
+  }
+  return out;
+})();
+
 // ---- layout ----------------------------------------------------------------
 
 const SPREAD = 64; // distance from origin to each family centroid

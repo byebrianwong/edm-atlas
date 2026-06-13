@@ -5,7 +5,7 @@ import { useAtlas, type LabelMode } from "../state/store";
 const MODES: LabelMode[] = ["hover", "family", "all"];
 const TICKS: { label: string; hint: string }[] = [
   { label: "Hover", hint: "Only the star you point at is named" },
-  { label: "Family", hint: "Name every genre in the constellation you open" },
+  { label: "Family", hint: "Name each family's lead genre, then every star in the one you open" },
   { label: "All", hint: "Name every star, all the time" },
 ];
 
