@@ -4,12 +4,14 @@ import { useAtlas } from "../state/store";
 export default function Brand() {
   const select = useAtlas((s) => s.select);
   const setFamilyFilter = useAtlas((s) => s.setFamilyFilter);
+  const setArea = useAtlas((s) => s.setArea);
   return (
     <button
       className="brand"
       onClick={() => {
         select(null);
         setFamilyFilter(null);
+        setArea(null);
       }}
       aria-label="EDM Atlas — back to overview"
     >

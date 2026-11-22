@@ -24,6 +24,9 @@ the synthesized genre demos.
   track. Lazy-loaded — Tone.js only downloads when you press play.
 - **Find your way** — search (`/`), a family legend that doubles as a filter, and
   clickable "connects to" chips that fly the camera between genres.
+- **Touch screens**: phones have no hover, so the first tap zooms into that area
+  and names every star (nudged apart so they don't overlap). Tap a name or star
+  to open it; tap empty space to step back out.
 - **Accessible fallback** — a full 2D list view (also the no-WebGL path and the
   SEO surface), keyboard support, and `prefers-reduced-motion` handling.
 

@@ -19,6 +19,7 @@ const ATLAS_DEFAULTS = {
   selectedId: null,
   hoveredId: null,
   familyFilter: null,
+  area: null,
   introSeen: false,
   reducedMotion: false,
   webglOk: true,

@@ -58,3 +58,30 @@
     0 0 14px rgba(2, 4, 10, 0.85);
   will-change: opacity;
 }
+
+/* tappable star name (touch: zoomed into an area). The padding grows the tap
+   target around the text; the shift keeps the text where .star-name puts it,
+   just under its star. */
+.star-name--tap {
+  display: block;
+  padding: 9px 10px;
+  margin: 0;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  line-height: 1.2;
+  transform: translateY(16px);
+  transition: transform 0.18s var(--ease);
+  pointer-events: auto;
+  touch-action: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.star-name--tap:active {
+  filter: brightness(1.35);
+}
+.star-name--tap:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: -4px;
+  border-radius: 8px;
+}

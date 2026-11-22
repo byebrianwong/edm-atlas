@@ -153,6 +153,23 @@ export const POSITIONS: Record<string, Vec3> = (() => {
   return pos;
 })();
 
+/** How far each family's farthest star sits from its centroid — used to frame
+ *  the camera on one cluster when you zoom into an area on touch. */
+export const FAMILY_RADIUS: Record<FamilyId, number> = (() => {
+  const out = {} as Record<FamilyId, number>;
+  for (const fid of FAMILY_IDS) {
+    const c = FAMILY_CENTROIDS[fid];
+    let r = 4;
+    for (const g of GENRES) {
+      if (g.family !== fid) continue;
+      const p = POSITIONS[g.id];
+      r = Math.max(r, Math.hypot(p[0] - c[0], p[1] - c[1], p[2] - c[2]));
+    }
+    out[fid] = r;
+  }
+  return out;
+})();
+
 /** Rough radius of the whole scene — used to frame the overview camera. */
 export const SCENE_RADIUS = (() => {
   let max = 1;
