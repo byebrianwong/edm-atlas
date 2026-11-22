@@ -17,6 +17,7 @@ export type Snapshot = {
   selectedId: string | null;
   familyFilter: FamilyId | null;
   labelMode: LabelMode;
+  area: FamilyId | null;
 };
 
 export type StarTarget = { opacity: number; scale: number; hot: boolean };
@@ -71,16 +72,19 @@ export function edgeTarget(
  * one constellation you open (select/filter); "all" reveals everything. In every
  * mode a live hover spotlights its own neighborhood and dims the rest, so the
  * names track the way the stars themselves dim.
+ *
+ * Zooming into an area on touch overrides the slider and names every star, so
+ * a phone (no hover, no slider) can read the map before choosing a genre.
  */
 export function ambientLabelTarget(
   id: string,
   family: FamilyId,
   s: Snapshot,
 ): number {
-  if (s.labelMode === "hover") return 0;
+  if (s.labelMode === "hover" && !s.area) return 0;
 
   let visible: boolean;
-  if (s.labelMode === "all") {
+  if (s.labelMode === "all" || s.area) {
     visible = true;
   } else {
     // "family": the constellation you've opened (selection) or filtered to.

@@ -20,11 +20,17 @@ export default function Intro() {
           <li>
             <b>Drag</b> to orbit
           </li>
-          <li>
+          <li className="for-mouse">
             <b>Scroll</b> to zoom
           </li>
-          <li>
+          <li className="for-mouse">
             <b>Click a star</b> to dive in
+          </li>
+          <li className="for-touch">
+            <b>Tap an area</b> to see its genres
+          </li>
+          <li className="for-touch">
+            <b>Tap a name</b> to dive in
           </li>
         </ul>
         <button className="intro__cta" onClick={dismiss}>

@@ -387,6 +387,25 @@
   border-radius: 50%;
   background: var(--ink-ghost);
 }
+/* touch screens (no hover) get the tap-to-zoom wording instead */
+.hint--touch,
+.intro__controls .for-touch {
+  display: none;
+}
+@media (hover: none) and (pointer: coarse) {
+  .hint--mouse,
+  .intro__controls .for-mouse {
+    display: none;
+  }
+  .hint--touch {
+    display: flex;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    white-space: nowrap;
+  }
+  .intro__controls .for-touch {
+    display: list-item;
+  }
+}
 
 /* ---- detail panel (right) ---- */
 .panel {
@@ -919,7 +938,7 @@
   .dock {
     display: none;
   }
-  .hint {
+  .hint--mouse {
     display: none;
   }
   .genrelist__inner {
